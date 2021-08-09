@@ -1,0 +1,255 @@
+//From Blog: https://medium.com/@reach2arunprakash/guvi-zen-code-sprint-javascript-practice-problems-in-json-objects-and-list-49ac3356a8a5
+//Problem 0 : Part B (15 mins):
+//====================================
+var myCar = {
+ make: 'Bugatti',
+ model: 'Bugatti La Voiture Noire',
+ year: 2019,
+ accidents: [
+ {
+ date: '3/15/2019',
+ damage_points: '5000',
+ atFaultForAccident: true
+ },
+ {
+ date: '7/4/2022',
+ damage_points: '2200',
+ atFaultForAccident: true
+ },
+ {
+ date: '6/22/2021',
+ damage_points: '7900',
+ atFaultForAccident: true
+ }
+ ]
+}
+
+//console.log(myCar);
+
+
+//Task 1: Loop over the accidents array. Change atFaultForAccident from true to false.
+//====================================
+for (var i=0;i<myCar.accidents.length;i++){
+    
+    myCar.accidents[i].atFaultForAccident = false
+    
+}
+
+//console.log(myCar);
+
+
+//Task 2: Print the dated of my accidents
+for (var i=0;i<myCar.accidents.length;i++){
+    
+    console.log(myCar.accidents[i].date);
+    
+}
+
+console.log(myCar);
+
+//Problem 1 (5 mins):
+//Parsing an JSON object’s Values:
+//Write a function called “printAllValues” which returns an newArray of all the input object’s values.
+//var object = {name: 'RajiniKanth', age: 33, hasPets : false};
+//Output: [“RajiniKanth”, 33, false]
+//====================================
+var object = {name: 'RajiniKanth', age: 33, hasPets : false};
+
+function printAllValues (user_obj) {
+        
+        var json_obj = JSON.parse(JSON.stringify(user_obj));
+        //console.log (json_obj);
+        var newArray = [];
+        for (let x in json_obj) {
+            newArray.push(json_obj[x]);
+        }
+        
+        return JSON.stringify(newArray);
+}
+
+console.log(printAllValues(object));
+//output: [ "RajiniKanth", 33, false ]
+
+
+//Problem 2 (5 mins):
+//Parsing an JSON object’s Values:
+//Write a function called “printAllKeys” which returns an newArray of all the input object’s keys.
+//Input: var object = {name : ‘RajiniKanth’, age : 25, hasPets : true}
+//Output: [‘name’, ‘age’, ‘hasPets’]
+//====================================
+
+var inputObject = {name: 'RajiniKanth', age: 25, hasPets : true};
+
+function printAllKeys (user_obj) {
+        
+        var json_obj = JSON.parse(JSON.stringify(user_obj));
+        //console.log (json_obj);
+        var newArray = [];
+        for (let x in json_obj) {
+            newArray.push(x);
+        }
+        
+        return JSON.stringify(newArray);
+}
+
+console.log(printAllKeys(inputObject));
+//output: ["name","age","hasPets"]
+
+
+//Problem 3( 7–9 mins):
+//Parsing an JSON object and convert it to a list:
+//Write a function called “convertObjectToList” which converts an object literal into an array of arrays.
+//Input:{name: "ISRO", age: 35, role: "Scientist"};
+//output: [[“name”, “ISRO”], [“age”, 35], [“role”, “Scientist”]]
+//=======================================================================
+var object = {name: "ISRO", age: 35, role: "Scientist"};
+
+
+function convertObjectToList (user_obj) {
+        
+        var json_obj = JSON.parse(JSON.stringify(user_obj));
+        //console.log (json_obj);
+        var newArray = [];
+        
+        for (let x in json_obj) {
+            //Need to use [] to generate array of arrays
+            newArray.push([x,json_obj[x]]);
+
+        }
+
+       return JSON.stringify(newArray);
+}
+
+console.log(convertObjectToList(object));
+//[["name","ISRO"],["age",35],["role","Scientist"]]
+
+
+//Problem 4( 5 mins):
+//Parsing a list and transform the first and last elements of it:
+//Write a function ‘transformFirstAndLast’ that takes in an array, and returns an object with:
+//1) the first element of the array as the object’s key, and
+//2) the last element of the array as that key’s value.
+//Input: var array = [“GUVI”, “I”, “am”, “Geek”];
+//Output: var object = {GUVI : “Geek”}
+//======================================================================
+var arr = ["GUVI", "I", "am", "Geek"];
+function transformFirstAndLast (arr){
+    var newObj = {};
+    
+    for (var i=0;i<arr.length;i++){
+        
+        newObj[arr[0]]= arr[arr.length-1]
+    }
+    return newObj
+    
+}
+
+const newObj = transformFirstAndLast(arr);
+console.log(newObj);
+//Output: { GUVI: 'Geek' }
+
+
+//Problem 5 ( 7 -9 mins):
+//Parsing a list of lists and convert into a JSON object:
+//Write a function “fromListToObject” which takes in an array of arrays, and returns an object with each pair of elements in the array as a key-value pair.
+//var array = [[“make”, “Ford”], [“model”, “Mustang”], [“year”, 1964]];
+//Output: {make : “Ford”, model : “Mustang”, year : 1964}
+
+//=========================================================================
+var array = [["make", "Ford"], ["model", "Mustang"], ["year", 1964]];
+
+function fromListToObject (arr){
+    
+    var obj = {};
+    for (var i=0;i<arr.length;i++) {
+    obj[arr[i][0]] = arr[i][1];
+    }
+    return obj;
+}
+
+const newObj = fromListToObject(array)
+console.log(newObj)
+//Output: { make: 'Ford', model: 'Mustang', year: 1964 }
+
+
+//Problem 6 (10 mins): "ASK DOUBT IN CLASS AS ONLY LAST ARRAY is getting printed"
+//Parsing a list of lists and convert into a JSON object:
+//Write a function called “transformGeekData” that transforms some set of data from one format to another.
+//Input (Array): var array = [[[“firstName”, “Vasanth”], [“lastName”, “Raja”], [“age”, 24], [“role”, “JSWizard”]], [[“firstName”, “Sri”], [“lastName”, “Devi”], [“age”, 28], [“role”, “Coder”]]];
+//Output:[{firstName: “Vasanth”, lastName: “Raja”, age: 24, role: “JSWizard”},{firstName: “Sri”, lastName: “Devi”, age: 28, role: “Coder”}]
+//========================================================
+var array = [[["firstName", "Vasanth"], ["lastName", "Raja"], ["age", 24],["role", "JSWizard"]], [["firstName", "Sri"], ["lastName", "Devi"], ["age", 28], ["role", "Coder"]]];
+
+function transformGeekData (arr) {
+ 
+        var obj_arr = [];
+        for (var i=0;i<arr.length;i++){
+        var obj = {};
+            for (var j=0; j <arr[i].length; j++){
+               // obj[arr[i][j][0]] = arr[i][j][1];
+               let key = arr[i][j][0]
+               let value = arr[i][j][1]
+               obj[key] = value;
+            }
+         obj_arr.push(obj);
+        }
+    return obj_arr;
+}
+
+//const newObj = transformGeekData(array)
+console.log(transformGeekData(array));
+//Output: [ { firstName: 'Vasanth',lastName: 'Raja',age: 24,role: 'JSWizard' },{ firstName: 'Sri', lastName: 'Devi',age: 28, role: 'Coder' } ]
+
+
+//Problem 8(10 mins):
+//Parsing JSON objects and Compare:
+//I have a mock data of security Questions and Answers. You function should take the object and a pair of strings and should return if the quest is present and if its valid answer
+//=======================================
+var securityQuestions = [
+ {
+ question: "What was your first pets name?",
+ expectedAnswer: "FlufferNutter"
+ },
+ {
+ question: "What was the model year of your first car?",
+ expectedAnswer: "1985"
+ },
+ {
+ question: "What city were you born in?",
+ expectedAnswer: "NYC"
+ }
+]
+
+//console.log(securityQuestions[0])
+
+function chksecurityQuestions(securityQuestions,question,ans) {
+
+    var len = securityQuestions.length
+    var status
+    for (var i=0;i<len;i++) {
+        
+        if(securityQuestions[i].question == question) {
+        
+        if (securityQuestions[i].expectedAnswer == ans) {
+            
+            return true
+        }
+        
+        }
+        
+        else {
+        return false
+            
+        }
+        
+    }
+    
+ 
+}
+
+var ques = "What was your first pets name?"
+var ans  = "FlufferNutter"
+var rstatus = chksecurityQuestions(securityQuestions, ques, ans);
+console.log(rstatus)
+//Output: true
+
